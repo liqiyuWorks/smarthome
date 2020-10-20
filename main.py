@@ -8,6 +8,7 @@ from tinydb import TinyDB, Query
 from dashboard import server as app
 import os
 import pathlib
+import json
 
 session = {'username': ''}
 
@@ -75,6 +76,26 @@ def do_signup():
         'password': request.form['password']
     })
     return redirect('/')
+
+
+### 自己的 代码 用于显示轨迹 ###
+@app.route('/show_track', methods=['GET'])
+def show_track():
+    data = {}
+    data = [
+        [116.478935,39.997761],
+        [116.478939,39.997825],
+        [116.478912,39.998549],
+        [116.478912,39.998549],
+        [116.478998,39.998555],
+        [116.478998,39.998555],
+        [116.479282,39.99856]
+        ]
+
+    
+    return render('show_track.html',data = data)
+
+
 
 
 if __name__ == '__main__':
