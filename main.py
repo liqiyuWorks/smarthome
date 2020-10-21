@@ -80,26 +80,44 @@ def do_signup():
 
 
 ### 自己的 代码 用于显示轨迹 ###
-@app.route('/show_track', methods=['GET'])
-def show_track():
-    
-    data = [
-        [116.478935,39.997761],
-        [116.478939,39.997825],
-        [116.478912,39.998549],
-        [116.478912,39.998549],
-        [116.478998,39.998555],
-        [116.478998,39.998555],
-        [116.479282,39.99856]
-        ]
+### 锦城湖
+@app.route('/show_JCH_track', methods=['GET'])
+def show_JCH_track():
 
-    data = location.data
-    center = location.center
+    data = location.data_JCH
+    center = location.data_JCH
 
     
     return render('show_track.html',data = data, center = center)
 
 
+@app.route('/show_TFGC_track', methods=['GET'])
+### 天府广场
+def show_TFGC_track():
+    data = location.data_tianfu
+    center = location.center_tianfu
+
+    return render('show_track.html',data = data, center = center)
+
+
+@app.route('/show_CD_track', methods=['GET'])
+# 川大
+def show_CD_track():
+    # data = [
+    #     [116.478935,39.997761],
+    #     [116.478939,39.997825],
+    #     [116.478912,39.998549],
+    #     [116.478912,39.998549],
+    #     [116.478998,39.998555],
+    #     [116.478998,39.998555],
+    #     [116.479282,39.99856]
+    #     ]
+
+    data = location.data_CD
+    center = location.center_CD
+
+    
+    return render('show_track.html',data = data, center = center)
 
 
 if __name__ == '__main__':
