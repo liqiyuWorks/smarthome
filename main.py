@@ -85,7 +85,7 @@ def do_signup():
 def show_JCH_track():
 
     data = location.data_JCH
-    center = location.data_JCH
+    center = location.center_JCH
 
     
     return render('show_track.html',data = data, center = center)
