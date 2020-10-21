@@ -9,6 +9,7 @@ from dashboard import server as app
 import os
 import pathlib
 import json
+from data import location
 
 session = {'username': ''}
 
@@ -81,7 +82,7 @@ def do_signup():
 ### 自己的 代码 用于显示轨迹 ###
 @app.route('/show_track', methods=['GET'])
 def show_track():
-    data = {}
+    
     data = [
         [116.478935,39.997761],
         [116.478939,39.997825],
@@ -92,8 +93,11 @@ def show_track():
         [116.479282,39.99856]
         ]
 
+    data = location.data
+    center = location.center
+
     
-    return render('show_track.html',data = data)
+    return render('show_track.html',data = data, center = center)
 
 
 
