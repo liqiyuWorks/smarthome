@@ -126,6 +126,15 @@ def show_CD_track():
     
     return render('show_track.html',data = data, center = center)
 
+@app.route('/show_HQZX_track', methods=['GET'])
+### 环球中心
+def show_HQZX_track():
+    data = location.data_HQZX
+    center = location.center_HQZX
+
+    return render('show_track.html',data = data, center = center)
+
+
 @app.route('/show_latest_location', methods=['GET'])
 ### 显示最新的定位数据
 def show_latest_location():
