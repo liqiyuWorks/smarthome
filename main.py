@@ -130,11 +130,11 @@ def show_CD_track():
 ### 显示最新的定位数据
 def show_latest_location():
     # data = [119.48047, 32.786118,]
+    print('进来了....')
     r = requests.get(url, headers=headers)
-    t: str = r.text
 
-    params = json.loads(t)
-    # print('params=',params)
+    params = json.loads(r.text)
+    print('params=',params)
     current_value = params.get('data')[0].get('current_value')
     lon = current_value.get('lon')
     lat = current_value.get('lat')
