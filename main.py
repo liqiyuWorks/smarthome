@@ -129,18 +129,18 @@ def show_CD_track():
 @app.route('/show_latest_location', methods=['GET'])
 ### 显示最新的定位数据
 def show_latest_location():
-    # data = [119.48047, 32.786118,]
+    data = [119.48047, 32.786118]
     print('进来了....')
     r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        params = json.loads(r.text)
+        print('params=',params)
+        current_value = params.get('data')[0].get('current_value')
+        lon = current_value.get('lon')
+        lat = current_value.get('lat')
 
-    params = json.loads(r.text)
-    print('params=',params)
-    current_value = params.get('data')[0].get('current_value')
-    lon = current_value.get('lon')
-    lat = current_value.get('lat')
-
-    data = [lon,lat]
-    print('最新的坐标是',data)
+        data = [lon,lat]
+        print('最新的坐标是',data)
 
     return render('show_latest_location.html',data = data, center = data)
 
