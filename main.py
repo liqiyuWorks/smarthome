@@ -8,8 +8,15 @@ from tinydb import TinyDB, Query
 from dashboard import server as app
 import os
 import pathlib
-import json
+import json, requests
 from data import location
+#设备ID
+deviceId = "638884917"
+APIKey = "HNGpdEZ=9hr2PRxQHwQkf3p9cJU="
+headers = {'api-key': APIKey}
+
+# 基本设置
+url = "http://api.heclouds.com/devices/"+deviceId+"/datastreams"
 
 session = {'username': ''}
 
@@ -118,6 +125,24 @@ def show_CD_track():
 
     
     return render('show_track.html',data = data, center = center)
+
+@app.route('/show_latest_location', methods=['GET'])
+### 显示最新的定位数据
+def show_latest_location():
+    # data = [119.48047, 32.786118,]
+    r = requests.get(url, headers=headers)
+    t: str = r.text
+
+    params = json.loads(t)
+    # print('params=',params)
+    current_value = params.get('data')[0].get('current_value')
+    lon = current_value.get('lon')
+    lat = current_value.get('lat')
+
+    data = [lon,lat]
+    print('最新的坐标是',data)
+
+    return render('show_latest_location.html',data = data, center = data)
 
 
 if __name__ == '__main__':
